@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Guesture } from '../models/pattern.model';
+import { Guesture, Play } from '../models/pattern.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +15,10 @@ export class GameboardService {
   
   getRandChoice(){
     return this.http.get<Guesture>(`${this.baseURL}/choice`);
+  }
+  
+  playGame(id:number){
+    let data = {"player": id}
+    return this.http.post<Play>(`${this.baseURL}/play`, data);
   }
 }
