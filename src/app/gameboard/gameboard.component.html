@@ -11,7 +11,11 @@
 
         <div fxLayout="column" fxLayoutAlign="space-around center">
             <h3>Step 2: Populate choices from the /choices endpoint</h3>
-            <button>click me!</button>
+            <button (click)="getGuestures()">click me!</button>
+
+            <ul>
+                <li *ngFor="let c of choices$ | async"><button (click)="mychoice(c.id)">{{c.name}}</button></li>
+            </ul>
         </div>
 
         <div fxLayout="column" fxLayoutAlign="space-around center">

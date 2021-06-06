@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Guesture } from '../models/pattern.model';
+import { GameboardService } from '../services/gameboard.service';
 
 @Component({
   templateUrl: './gameboard.component.html',
@@ -6,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameboardComponent implements OnInit {
 
-  constructor() { }
+  choices: Guesture[] = []
+  
+  choices$: Observable<Guesture[]> = new Observable<Guesture[]>();
+
+  constructor(private gameService: GameboardService) { }
 
   ngOnInit(): void {
   }
 
+
+  getGuestures() {  
+    this.choices$ = this.gameService.getGuestures()
+  }
+
+  mychoice(id:number) {
+    console.log(`number ${id}`)
+  }
 }
