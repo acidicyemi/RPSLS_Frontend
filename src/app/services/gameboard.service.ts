@@ -12,4 +12,8 @@ export class GameboardService {
   getGuestures() {
     return this.http.get<Guesture[]>(`${this.baseURL}/choices`);
   }
+  
+  getRandChoice(){
+    return this.http.get<Guesture>(`${this.baseURL}/choice`);
+  }
 }

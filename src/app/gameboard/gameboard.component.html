@@ -23,8 +23,10 @@
 
             <h3>Random Choice</h3>
 
-            <button>click me!</button>
-            
+            <button (click)="getRandChoice()" >Get Random Choice from /choice endpoint</button>
+
+            <p *ngIf="randChoice != '' ">{{randChoice}}</p>
+
             <button>But why this ugly page?</button>
             
         </div>

@@ -9,6 +9,8 @@ import { GameboardService } from '../services/gameboard.service';
 })
 export class GameboardComponent implements OnInit {
 
+  randChoice:string = ""
+
   choices: Guesture[] = []
   
   choices$: Observable<Guesture[]> = new Observable<Guesture[]>();
@@ -25,5 +27,14 @@ export class GameboardComponent implements OnInit {
 
   mychoice(id:number) {
     console.log(`number ${id}`)
+  }
+
+  getRandChoice(){
+    this.gameService.getRandChoice().subscribe(
+      (data) => { 
+        this.randChoice = data.name
+      }
+      
+    )
   }
 }
