@@ -8,7 +8,7 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class GameboardService {
-  private _baseURL: string = "http://127.0.0.1:8084";
+  private _baseURL: string = "https://codechallenge.boohma.com";
 
   public get baseURL(): string {
     return this._baseURL;

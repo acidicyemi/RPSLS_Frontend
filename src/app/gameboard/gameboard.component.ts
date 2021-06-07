@@ -14,7 +14,7 @@ export class GameboardComponent implements OnInit, OnDestroy {
   status: string = "";
   singlePlayer: boolean = true
   p1c: number = 0
-  private _baseUrl: string = "http://127.0.0.1:8084"
+  private _baseUrl: string = "https://codechallenge.boohma.com"
 
   choices: Guesture[] = [];
 
