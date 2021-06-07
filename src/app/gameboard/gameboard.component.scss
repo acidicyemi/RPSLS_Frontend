@@ -1,0 +1,52 @@
+.game-board {
+    height: 100vh;
+    font-family: Roboto;
+    &-card{
+        padding: 20px;
+        height: 100%;
+        color: #F7F7F7;
+        background: #4F1C32;
+        h2 {
+            font-style: normal;
+            font-weight: bold;
+            font-size: 40px;
+            line-height: 60px;
+            text-transform: capitalize;
+            color: #FCFCFC;
+        }
+
+    p {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 23px;
+        color: #E0E0E0;
+    }
+    input {
+        background: #F7F7F7;
+        border: 1px solid #F59F13;
+        box-sizing: border-box;
+        box-shadow: 0px 1px 20px rgba(69, 72, 137, 0.1);
+        border-radius: 8px;
+        height: 40px;
+        width: 100%;
+        padding: 0px 20px;
+        color: rgba(88, 88, 88, 0.6);
+      }
+
+      input:focus {
+        outline: none !important;
+        border: 1px solid rgba(51, 51, 51, 0.17);
+        padding: 0px 20px;
+      }
+
+      h3 {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 25px;
+        line-height: 60px;
+        text-transform: capitalize;
+        color: #FCFCFC;
+      }
+    }
+}

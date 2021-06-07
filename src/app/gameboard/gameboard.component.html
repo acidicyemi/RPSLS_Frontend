@@ -1,23 +1,22 @@
-<div class="game-board" fxLayout="row wrap"fxLayoutAlign="space-around center" >
+<div class="game-board" fxLayout="row wrap" fxLayoutAlign="space-around center">
     <div fxFlex="10%"></div>
-    <div fxFlex="80%" fxLayout="column" fxLayoutAlign="space-around center">
+    <div fxFlex="80%" class="game-board-card" fxLayout="column" fxLayoutAlign="start center">
         <h2>Rock Paper Scissors Lizard Spock</h2>
-        <p>This is a mock front-end to test your RPSLS API against.</p>
+        <p class="game-description">This is a mock front-end to test your RPSLS API against.</p>
 
         <div fxLayout="column" fxLayoutAlign="space-around center">
             <h3>Step 1: Put your root URL here</h3>
-            <input type="text" placeholder="put your url here">
+            <input type="text" name="url" placeholder="Put your root URL here" formControlName="url">
         </div>
 
-        <div fxLayout="column" fxLayoutAlign="space-around center">
+        <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="10px">
             <h3>Step 2: Populate choices from the /choices endpoint</h3>
-            <button (click)="getGuestures()">click me!</button>
+            <button mat-raised-button (click)="getGuestures()">click me!</button>
 
-            <ul>
-                <li *ngFor="let c of choices"><button (click)="mychoice(c.id)">{{c.name}}</button></li>
-            </ul>
-
-            <p *ngIf="status != '' ">{{status}}</p>
+            <div fxLayout="row" fxLayoutGap="10px">
+                <button mat-raised-button *ngFor="let c of choices" (click)="mychoice(c.id)">{{c.name}}</button>
+            </div>
+            <p>{{status}} </p>
         </div>
 
         <div fxLayout="column" fxLayoutAlign="space-around center">
@@ -25,14 +24,12 @@
 
             <h3>Random Choice</h3>
 
-            <button (click)="getRandChoice()" >Get Random Choice from /choice endpoint</button>
+            <button mat-raised-button (click)="getRandChoice()">Get Random Choice from /choice endpoint</button>
 
-            <p *ngIf="randChoice != '' ">{{randChoice}}</p>
+            <p>{{randChoice}}</p>
 
-            <button>But why this ugly page?</button>
-            
+            <button mat-raised-button>But why this ugly page?</button>
         </div>
-
     </div>
     <div fxFlex="10%"></div>
 </div>
