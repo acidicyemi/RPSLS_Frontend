@@ -12,7 +12,7 @@ export class GameboardComponent implements OnInit, OnDestroy {
 
   randChoice: string = "";
   status: string = "";
-  singlePlayer: boolean = false
+  singlePlayer: boolean = true
   p1c: number = 0
   private _baseUrl: string = "http://127.0.0.1:8084"
 
@@ -46,7 +46,24 @@ export class GameboardComponent implements OnInit, OnDestroy {
     this.gameService.playGame(id).subscribe(
       (data) => {
         console.log(data, this.choices);
-        this.status = `You played ${this.choices[data.player - 1].name} & the computer played ${this.choices[data.computer - 1].name}. You ${data.results} `
+        this.status = `You played ${this.choices[data.player - 1].name} & the computer played ${this.choices[data.computer - 1].name}. You ${data.results}`
+        // save score to localStorage
+        let player = 0
+        let computer = 0
+        if (data.results == "tie") return;
+        if (data.results == "win") {
+          player = 1
+        }else {
+          computer = 1
+        }
+        let v = localStorage.getItem("singleScore")
+        var values = JSON.parse(`${v}`);
+
+        if(values != null) {
+          player = values.player + player
+          computer = values.computer + computer
+        }
+        localStorage.setItem('singleScore', JSON.stringify({"player": player, "computer": computer}))
       },
       (err) => console.log(err),
       () => console.log("completed")
@@ -67,6 +84,22 @@ export class GameboardComponent implements OnInit, OnDestroy {
     this.gameService.multiplayer(this.p1c, id).subscribe(
       (data) => {
         this.status = `player1 played ${this.choices[data.player1 - 1]?.name} & the player2 played ${this.choices[data.player2 - 1]?.name}. Player1 ${data.results}`
+        let player1 = 0
+        let player2 = 0
+        if (data.results == "tie") return;
+        if (data.results == "win") {
+          player1 = 1
+        }else {
+          player2 = 1
+        }
+        let v = localStorage.getItem("multiPlayerScore")
+        var values = JSON.parse(`${v}`);
+
+        if(values != null) {
+          player1 = values.player1 + player1
+          player2 = values.player2 + player2
+        }
+        localStorage.setItem('multiPlayerScore', JSON.stringify({"player1": player1, "player2": player2}))
       },
       (err) => console.log(err),
       () => {
@@ -76,7 +109,38 @@ export class GameboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // TODO UNSUBSCRIBE
+    
+  }
+
+  showScore(){
+    if(this.singlePlayer) {
+      let v = localStorage.getItem("singleScore")
+      var values = JSON.parse(`${v}`);
+      if(values != null) {
+        console.log(values)
+        alert(`player : ${values.player}, computer: ${values.computer}`)
+        return
+      }
+      alert(`player : 0, computer: 0`)
+      return
+    }
+    let v = localStorage.getItem("multiPlayerScore")
+    var values = JSON.parse(`${v}`);
+    if(values != null) {
+      console.log(values)
+      alert(`player1 : ${values.player1}, player2: ${values.player2}`)
+      return;
+    }
+    alert(`player1 : 0, player2: 0`)
+    return
+  }
+
+  clearScore(){
+    if (this.singlePlayer) {
+      localStorage.setItem('singleScore', JSON.stringify({"player": 0, "computer": 0}))
+      return
+    }
+    localStorage.setItem('multiPlayerScore', JSON.stringify({"player1": 0, "player2": 0}))
   }
 
 }

@@ -8,10 +8,16 @@
             <h3>Step 1: Put your root URL here</h3>
             <input type="text" [(ngModel)]="baseURL"  placeholder="Put your root URL here"/>
 
-            <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-                <mat-button-toggle value="bold"(click)="singlePlayer = true">Single Player</mat-button-toggle>
-                <mat-button-toggle value="bold" (click)="singlePlayer = false" >Multi Player</mat-button-toggle>
-              </mat-button-toggle-group>
+            <div>
+                <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+                    <mat-button-toggle value="bold"(click)="singlePlayer = true">Single Player</mat-button-toggle>
+                    <mat-button-toggle value="bold" (click)="singlePlayer = false" >Multi Player</mat-button-toggle>
+                  </mat-button-toggle-group>
+                <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+                    <mat-button-toggle value="bold" (click)="showScore()">Show Score</mat-button-toggle>
+                    <mat-button-toggle value="bold" (click)="clearScore()" >clear Score</mat-button-toggle>
+                  </mat-button-toggle-group>
+            </div>
         </div>
 
         <!-- single player starts -->
