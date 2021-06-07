@@ -6,11 +6,17 @@
 
         <div fxLayout="column" fxLayoutAlign="space-around center">
             <h3>Step 1: Put your root URL here</h3>
-            <input type="text" name="url" placeholder="Put your root URL here" formControlName="url">
+            <input type="text" [(ngModel)]="baseURL"  placeholder="Put your root URL here"/>
+
+            <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+                <mat-button-toggle value="bold"(click)="singlePlayer = true">Single Player</mat-button-toggle>
+                <mat-button-toggle value="bold" (click)="singlePlayer = false" >Multi Player</mat-button-toggle>
+              </mat-button-toggle-group>
         </div>
 
-        <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="10px">
-            <h3>Step 2: Populate choices from the /choices endpoint</h3>
+        <!-- single player starts -->
+        <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="10px" *ngIf="singlePlayer" >
+            <h3>Step 2: Populate choices from the /choices endpoint Single player mode</h3>
             <button mat-raised-button (click)="getGuestures()">click me!</button>
 
             <div fxLayout="row" fxLayoutGap="10px">
@@ -18,6 +24,25 @@
             </div>
             <p>{{status}} </p>
         </div>
+        <!-- single player ends -->
+        
+        <!-- multi player starts -->
+        <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="10px" *ngIf="!singlePlayer" >
+            <h3>Step 2: Populate choices from the /choices endpoint multiplayer mode</h3>
+            <button mat-raised-button (click)="getGuestures()">click me!</button>
+
+            <div fxLayout="row" fxLayoutGap="10px">
+                <h4>Player 1</h4>
+                <button mat-raised-button *ngFor="let c of choices" (click)="p1c = c.id">{{c.name}}</button>
+            </div>
+            <div fxLayout="row" fxLayoutGap="10px" *ngIf="p1c > 0">
+                <h4>Player 2</h4>
+                <button mat-raised-button *ngFor="let c of choices" (click)="multiplayer(c.id)">{{c.name}}</button>
+            </div>
+
+            <p>{{status}} </p>
+        </div>
+        <!-- multi player ends -->
 
         <div fxLayout="column" fxLayoutAlign="space-around center">
             <h3>Step 3: Click an above choice to play against the computer with the /play endpoint</h3>

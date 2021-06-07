@@ -8,3 +8,9 @@ export interface Play {
     player: number;
     results: string
 }
+
+export interface MultiPlayer {
+    player1: number;
+    player2: number;
+    results: string
+}
